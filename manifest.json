@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.akton1.fullscreen-app-auto-workspace",
+  "name": "Fullscreen App Auto Workspace",
+  "version": "1.0.0",
+  "author": "AktOn1",
+  "license": "MIT",
+  "description": "Fullscreen games get their own special workspace: they move there by themselves, stay fullscreen, and a keybind hides or brings them back.",
+  "kinds": [
+    "service"
+  ],
+  "entryPoints": {
+    "service": "FullscreenAppAutoWorkspace.qml"
+  }
+}
