@@ -105,3 +105,7 @@ Then delete your keybind from `bindings.lua`, and the settings folder if you cre
 ## License
 
 MIT
+
+## Support
+
+Free and MIT licensed. If it is useful to you and you want to say thanks, you can [buy me a coffee on Ko-fi](https://ko-fi.com/akton1). Totally optional.
