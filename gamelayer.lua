@@ -15,6 +15,7 @@ end
 
 local LAYER = "fullscreen"
 local LAYER_WS = "special:" .. LAYER
+local keep_others = false
 
 local M = {}
 local rules, handlers, timers = {}, {}, {}
@@ -124,7 +125,7 @@ local function sweep()
   end
   local windows = hl.get_windows()
   for _, window in ipairs(windows) do
-    if window.mapped and not busy[window.address] and not is_game(window) and on_layer(window) then
+    if not keep_others and window.mapped and not busy[window.address] and not is_game(window) and on_layer(window) then
       evict(window)
     end
   end
@@ -185,12 +186,17 @@ end
 -- opts.extra_classes:    extra window class patterns that count as games
 -- opts.never_fullscreen: class patterns whose fullscreen Hyprland decides
 -- opts.sweep_interval_ms: how often the safety sweep runs (default 1500)
+-- opts.layer:            name of the special workspace the games go to (default "fullscreen")
+-- opts.keep_others:      leave non-game windows on that workspace alone (set when it is a shared scratchpad)
 function M.start(opts)
   opts = opts or {}
   if running then
     M.stop()
   end
   running = true
+  LAYER = type(opts.layer) == "string" and opts.layer ~= "" and opts.layer or "fullscreen"
+  LAYER_WS = "special:" .. LAYER
+  keep_others = opts.keep_others == true
 
   -- Wine/Proton (*.exe), Proton (steam_app_*), gamescope, and anything that
   -- declares itself a game. Browser videos and players are left alone.
