@@ -62,6 +62,7 @@ Optional file `~/.config/fullscreen-app-auto-workspace/config.json`, picked up a
 | `muteOnHide` | `false` | Fade out and mute the game's audio while the layer is hidden, fade it back in when it returns |
 | `layer` | `fullscreen` | Name of the special workspace the games go to (for example a scratchpad name, set by the AktOn1 Plugin Hub) |
 | `keepOthers` | `false` | Leave apps that are not games alone on the layer instead of sending them back to the normal workspace (set by the AktOn1 Plugin Hub when you give the Fullscreen layer its own apps; always on when `layer` is another scratchpad) |
+| `autoMove` | `true` | `false` = fullscreen games are not moved to the layer by themselves (the toggle key still shows and hides the layer; set by the AktOn1 Plugin Hub when no layer is ticked for fullscreen games) |
 | `muteFadeMs` | `300` | Length of that audio fade (0 to 5000, `0` = instant) |
 
 The animation settings change only the `specialWorkspaceIn` / `specialWorkspaceOut` animations, so they also apply to your other special workspaces (for example the scratchpad). The shape (curve and style) is taken from your own `specialWorkspace` animation, only the length changes. A Hyprland config reload resets them, and the plugin applies them again.

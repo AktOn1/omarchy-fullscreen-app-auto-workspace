@@ -26,6 +26,7 @@ Scope {
   property bool muteOnHide: false
   property int muteFadeMs: 300
   property bool keepOthers: false
+  property bool autoMove: true
 
   property string layer: "fullscreen"
   readonly property string layerWs: "special:" + layer
@@ -56,6 +57,7 @@ Scope {
     muteOnHide = c.muteOnHide === true
     muteFadeMs = clampInt(c.muteFadeMs, 0, 5000, 300)
     keepOthers = c.keepOthers === true
+    autoMove = c.autoMove !== false
     layer = typeof c.layer === "string" && /^[a-z0-9_-]{1,24}$/.test(c.layer) ? c.layer : "fullscreen"
     if (!muteOnHide) restoreAudio(false)
     load()
@@ -357,7 +359,8 @@ Scope {
     loader.command = ["hyprctl", "eval", "local m = dofile(" + luaString(luaFile) + "); m.start({ extra_classes = "
             + luaList(extraClasses) + ", never_fullscreen = " + luaList(neverFullscreen)
             + ", sweep_interval_ms = " + sweepIntervalMs + ", layer = " + luaString(layer)
-            + ", keep_others = " + (layer !== "fullscreen" || keepOthers ? "true" : "false") + " })"]
+            + ", keep_others = " + (layer !== "fullscreen" || keepOthers ? "true" : "false")
+            + ", auto_move = " + (autoMove ? "true" : "false") + " })"]
     loader.running = false
     loader.running = true
     syncAnimations()
@@ -404,12 +407,12 @@ Scope {
       return JSON.stringify({ layer: root.layer, extraClasses: root.extraClasses, neverFullscreen: root.neverFullscreen,
                               sweepIntervalMs: root.sweepIntervalMs, animationInMs: root.animationInMs,
                               animationOutMs: root.animationOutMs, muteOnHide: root.muteOnHide,
-                              muteFadeMs: root.muteFadeMs, keepOthers: root.keepOthers, configured: Object.keys(root.config) })
+                              muteFadeMs: root.muteFadeMs, keepOthers: root.keepOthers, autoMove: root.autoMove, configured: Object.keys(root.config) })
     }
     // option <key> <value>: value is JSON (true, 400, ["^a$"]) or plain text; "unset" removes the key.
     function option(key: string, value: string): string {
       const known = ["layer", "extraClasses", "neverFullscreen", "sweepIntervalMs", "animationInMs",
-                     "animationOutMs", "muteOnHide", "muteFadeMs", "keepOthers"]
+                     "animationOutMs", "muteOnHide", "muteFadeMs", "keepOthers", "autoMove"]
       if (known.indexOf(key) < 0) return "error: unknown key " + key + " (" + known.join(", ") + ")"
       const next = Object.assign({}, root.config)
       if (value === "unset") delete next[key]
