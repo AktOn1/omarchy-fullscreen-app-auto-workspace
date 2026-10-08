@@ -1,5 +1,7 @@
 # Fullscreen App Auto Workspace
 
+<a href='https://ko-fi.com/akton1' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 Fullscreen games get their own special workspace, like a scratchpad. A game that runs fullscreen or borderless (a window covering its whole monitor) moves there by itself and stays fullscreen. A keybind hides the layer and brings it back. Windowed games and all other apps are left alone.
 
 ## Install
